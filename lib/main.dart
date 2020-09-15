@@ -69,7 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   _buildDecription(Person person) {
     if (type == 'location') return _buildLocation(person.location);
-    if (type == 'info') return _buildInfoMation(person.name.first + '' + person.name.last, person.old, person.sex);
+    if (type == 'info')
+      return _buildInfoMation(person.name.first + '' + person.name.last, person.old, person.sex);
     if (type == 'call') return _buildPhoneNumber(person.numberPhone);
   }
 
@@ -168,8 +169,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   width: 150,
                   height: 150,
                   child: ClipOval(
-                    child: Image.network(person.imageUrl, fit: BoxFit.cover,)
-                  ),
+                      child: Image.network(
+                    person.imageUrl,
+                    fit: BoxFit.cover,
+                  )),
                 )
               ],
             ),
@@ -195,8 +198,8 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Text(
         'Sống tại: ${location.street}, ${location.city}, ${location.state}',
         textAlign: TextAlign.center,
-        style: TextStyle(fontWeight: FontWeight.bold,
-        
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
@@ -267,8 +270,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    print(size.width);
-    int i = 0;
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -279,9 +280,6 @@ class _MyHomePageState extends State<MyHomePage> {
           alignment: Alignment.center,
           children: persons.map(
             (item) {
-              print(i++);
-
-              print(listOffset.length);
               var index = persons.indexOf(item);
               return StreamBuilder(
                 initialData: listOffset,
@@ -306,8 +304,8 @@ class _MyHomePageState extends State<MyHomePage> {
                       } else {
                         setState(() {
                           persons.removeLast();
-                          listFavorite.add(item);
                         });
+                        listFavorite.add(item);
                       }
                     },
                     onPanUpdate: (details) {
